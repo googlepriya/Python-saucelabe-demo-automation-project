@@ -25,16 +25,9 @@ def test_filter(setup):
     # 3.Test sort the product
     test_product =  ProductPage(driver)
     test_product.sortProduct("Name (Z to A)")
-    time.sleep(2)
-
     test_product.sortProduct("Price (low to high)")
-    time.sleep(2)
-
     test_product.sortProduct("Price (high to low)")
-    time.sleep(2)
-
     test_product.sortProduct("Name (A to Z)")
-    time.sleep(2)
 
     # 4.Add to Cart
     test_product.addToCart()
@@ -51,6 +44,31 @@ def test_filter(setup):
     #Assrt to check item is removed from the cart
     add_to_card = driver.find_element(By.ID,"add-to-cart").text
     assert "Add to cart" in add_to_card, "Item is not removed from the cart"
+
+    # 6.Test the Back to Products
+    test_product.backToProducts()
+    time.sleep(2)
+
+    # 7.Test Checkout:
+    test_product.addToCart()
+    time.sleep(2)
+
+    test_product.checkout("Google","S","630900")
+    time.sleep(2)
+
+    # Assert to check Checkout the item is successfully completed
+    order_success_message = driver.find_element(By.XPATH,"//h2[@class='complete-header']").text
+    assert "Thank you for your order!" in order_success_message, "Checkout the item is failed"
+
+    test_product.backToProducts()
+    time.sleep(2)
+
+
+
+
+    
+
+
 
 
 
