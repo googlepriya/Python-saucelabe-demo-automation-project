@@ -7,7 +7,6 @@ class LoginPage:
         self.password_input = (By.ID, "password")
         self.login_button = (By.ID, "login-button")
 
-
     def enterUsernme(self, username):
         self.driver.find_element(*self.username_input).send_keys(username)
     
